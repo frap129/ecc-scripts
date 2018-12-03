@@ -1,8 +1,8 @@
 from gmpy2 import invert
 
 # Needed values
-multiple = 2
-point = (3, 6)
+multiple = 3
+point = (5, 1)
 prime = 17
 a = 2
 
@@ -62,7 +62,7 @@ def getSequence(multiple):
 
 currentPoint = point
 for x in getSequence(multiple):
-    if (x == 1):
+    if (int(x) == 1):
         currentPoint = double(point, prime, a)
         currentPoint = add(point, currentPoint, prime)
     else:
