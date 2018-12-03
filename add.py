@@ -1,5 +1,12 @@
 from gmpy2 import invert
 
+
+# Needed values
+pointOne = (5, 1)
+pointTwo = (6, 3)
+prime = 17
+
+# Special mod function to make sure x mod x = x, not x mod x = 0
 def mod(int, p):
     if (int == p):
         return int
@@ -8,27 +15,38 @@ def mod(int, p):
     else:
         return (int % p)
 
-x1 = 5
-y1 = 1
-x2 = 8
-y2 = 7
-a = 2
-p = 17
+# Function that assures s will be a whole number
+def sValue(num, den, prime):
+    s = prime + 1
+    if ((num % den) == 0):
+        s = mod((num//den), prime)
+    else:
+        s = mod((num * invert(den, prime)), prime)
 
-sn = (y2 - y1)
-sd = (x2 - x1)
-s = p + 1
-if ((sn % sd) != 0):
-    s = mod((sn * invert(sd, p)), p)
-else:
-    s = mod((sn//sd), p)
+    if (s > prime):
+        print "ya messed up"
+        exit()
+    else:
+        print "s value: " + str(s)
 
-if (s < p):
-    print s
-else:
-    print "ya messed up"
+    return s
 
-x3 = mod((((s^2) - x1) - x2), p)
-y3 = mod(((s * (x1 - x3)) - y1), p)
+# Calculate a point addition
+def newPoint(pointOne, pointTwo, prime, s):
+    x = mod((((s**2) - pointOne[0]) - pointTwo[0]), prime)
+    y = mod(((s * (pointOne[0] - x)) - pointOne[1]), prime)
+    return (x, y)
 
-print "(" + str(x3) + "," + str(y3) + ")"
+# Calculate s value for addition and add
+def add(pointOne, pointTwo, prime):
+    # Calculate s value
+    sn = (pointTwo[1] - pointOne[1])
+    sd = (pointTwo[0] - pointOne[0])
+    s = sValue(sn, sd, prime)
+
+    # Calculate and return point
+    return newPoint(pointOne, pointTwo, prime, s)
+
+sumPoint = add(pointOne, pointTwo, prime)
+print"P+Q = (" + str(sumPoint[0]) + "," + str(sumPoint[1]) + ")"
+

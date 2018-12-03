@@ -69,6 +69,6 @@ for x in getSequence(multiple):
         currentPoint = double(currentPoint, prime, a)
 
 
-print str(multiple) + "P" + " = " + "(" + str(currentPoint[0]) + "," + str(currentPoint[1]) +")"
+print str(multiple) + "P = (" + str(currentPoint[0]) + "," + str(currentPoint[1]) +")"
 
 
