@@ -64,7 +64,7 @@ currentPoint = point
 for x in getSequence(multiple):
     if (x == 1):
         currentPoint = double(point, prime, a)
-        currentPoint = add (point, currentPoint, prime)
+        currentPoint = add(point, currentPoint, prime)
     else:
         currentPoint = double(currentPoint, prime, a)
 
